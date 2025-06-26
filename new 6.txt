@@ -1,0 +1,6 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Eagle Eye | Created by Cyber</title>
+  <meta name="google-site-verification" content="<meta name="google-site-verification" content="T89Q48IGPdUiZpLT1j2uKEX2P28uU2IHRxUToxsKoZw" />" />
+  <link rel="stylesheet" href="style.css">
+</head>
