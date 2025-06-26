@@ -1,0 +1,120 @@
+eagle-eye/
+├── index.html             ← মূল ওয়েবসাইট
+├── style.css              ← ডিজাইন থিম
+├── script.js              ← লজিক + Copilot বাটন
+├── stegano_extract.py     ← Python স্ক্যানার
+├── assets/
+│   └── logo.png           ← Eagle Eye লোগো (placeholder)
+├── README_bn.txt          ← বাংলায় গাইড
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Eagle Eye | Created by Cyber</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🦅 Eagle Eye</h1>
+    <p>ছবির গোপন তথ্য ও বার্তা প্রকাশ করুন — Powered by Cyber</p>
+  </header>
+
+  <section class="upload-section">
+    <input type="file" id="imgInput" accept="image/*"><br><br>
+
+    <h3>📜 Base64 কোড:</h3>
+    <textarea id="base64output" rows="8" readonly></textarea>
+  </section>
+
+  <div id="copilotButton" onclick="openCopilot()">🤖 Copilot-এর সাথে কথা বলুন</div>
+
+  <footer>
+    Created with 💙 by <strong>Cyber</strong> | Powered by Copilot
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f0f0f;
+  color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  padding: 2rem;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 10px #0ff;
+}
+
+.upload-section {
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #222;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+textarea {
+  width: 100%;
+  background-color: #111;
+  color: lime;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+#copilotButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1e90ff;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 15px #00f2ff;
+}
+
+footer {
+  margin-top: 3rem;
+  padding: 1rem;
+  background-color: #1a1a1a;
+  font-size: 0.9rem;
+  color: #888;
+}
+// Base64 কোড বের করা
+document.getElementById("imgInput").addEventListener("change", function(evt) {
+  const file = evt.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    document.getElementById("base64output").value = event.target.result;
+  };
+
+  reader.readAsDataURL(file);
+});
+
+// Copilot চ্যাট চালু
+function openCopilot() {
+  window.open("https://copilot.microsoft.com", "_blank");
+}
+from stegano import lsb
+
+print("🦅 Welcome to Eagle Eye | Hidden Message Scanner")
+image_path = input("📁 ছবির ফাইল নাম দিন (উদাহরণ: image.png): ")
+
+try:
+    secret = lsb.reveal(image_path)
+    if secret:
+        print(f"🔐 লুকানো বার্তা পাওয়া গেছে:\n\n{secret}")
+    else:
+        print("❌ কোনো লুকানো বার্তা পাওয়া যায়নি।")
+except Exception as e:
+    print("⚠️ সমস্যা হয়েছে:", e)
+pip install stegano
